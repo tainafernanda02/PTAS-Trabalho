@@ -1,0 +1,29 @@
+<br /> 
+  <div class="container">
+  <form action="/update_prod" method="post">
+  <div class="mb-3">
+    <input type="hidden" name="id" value="{{id}}"></input>
+    
+    <label for="exampleInputEmail1" class="form-label">Nome</label>
+
+    
+    <input type="text" class="form-control" id="nome" aria-describedby="emailHelp" name="nome"  value="{{nome}}">
+    
+    <label for="exampleInputEmail1" class="form-label">Email </label>
+    
+    <input type="number" class="form-control"  aria-describedby="emailHelp" name="preco" id="preco"" value="{{preco}}">
+    
+ 
+  </div>
+  <div class="col-auto">
+    <label for="inputPassword6" class="col-form-label">Senha</label>
+  </div>
+  <div class="col-auto">
+    <input type="text" class="form-control" aria-describedby="passwordHelpInline" id="img" name="img" value="{{img}}">
+  </div>
+  <div class="col-auto">
+    <br>
+     <button type="submit" class="btn btn-outline-dark">Alterar</button>
+      </div>
+  </form>
+  </div>

@@ -1,0 +1,55 @@
+<br /> 
+<div class="container">
+
+  <h2>Produtos Cadastrados</h2>
+{{#if table}}
+{{#each produtos}}
+  <div class="card" style="width: 18rem;">
+  <img src="{{img}}" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">{{nome}}</h5>
+    <p class="card-text">R${{preco}}</p>
+       <form action="/editar_prod" method="post">
+          <input type="hidden" name="id" value="{{id}}"></input>
+          <button type="submit" class="btn btn-outline-success">Alterar</button>
+        </form>
+                    <form action="/excluir_prod" method="post">
+          <input type="hidden" name="id" value="{{id}}"></input>
+          <button type="submit" class="btn btn-outline-danger">Excluir</button>
+        </form>
+        
+  </div>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">id</th>
+      <th scope="col">Nome</th>
+      <th scope="col">Preço</th>
+      <th scope="col">IMAGEM</th>
+    </tr>
+  </thead>
+      
+  <tbody>
+    <tr>
+      <th scope="row">{{id}}</th>
+      <td>{{nome}}</td>
+      <td>{{preco}}</td>
+       <td><img src="{{img}}"></td>
+      <td>
+    
+
+      </td>
+            {{/each}}
+    </tr> 
+  </tbody>
+</table>
+  {{else}}
+<div class="card mt-4">
+    <div class="card-body">
+    nenhum dado encontrado!
+  </div>
+</div>
+  {{/if}}
+</div>
+ 
