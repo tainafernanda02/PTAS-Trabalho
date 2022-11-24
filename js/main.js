@@ -1,3 +1,4 @@
+//banco de dados
 let url ="";
 const main = document.querySelector('main');
 
