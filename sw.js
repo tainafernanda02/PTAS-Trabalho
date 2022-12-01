@@ -1,7 +1,7 @@
 let cacheName = "noticias-app";
 let filesToCache = ["/", "/index.html", 
                 "/css/style.css", "/js/main.js", "https://fonts.googleapis.com/css?family=Poppins&display=swap",
-                "/pages/fallback.html"];
+                "/pages/fallback.html", "/home.html"];
 
 /* inicializando a service worker e fazendo o 
 download do conteúdo da aplicação */

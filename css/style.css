@@ -39,3 +39,14 @@
     color: inherit;
     font-size: 10px;
   }
+
+ .img {
+margin-left: 15%;
+margin-right: 15%;
+margin-top: 5%;
+display: flex;
+ }
+
+ .margin { 
+  margin-top: 15% !important;
+ }
