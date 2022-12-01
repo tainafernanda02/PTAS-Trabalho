@@ -1,5 +1,5 @@
 //banco de dados
-let url ="";
+let url ="https://amused-vestments-calf.cyclic.app";
 const main = document.querySelector('main');
 
 window.addEventListener('load', e => {
@@ -18,11 +18,12 @@ async function postNews() {
 
 function createArticle(article){
     return `
-           <div class="article">
-                    <img src="${article.imagem}" class="image" />
-                    <h2>${article.titulo}</h2>
+           <article class="article">
+                    <img src="" class="image" />
+                    <h2>${article.nome}</h2>
                     <p>${article.descricao}</p>
+                    <p>${article.preco}</p>
                 </a>
-           </div>
+           </article>
     `
 }
