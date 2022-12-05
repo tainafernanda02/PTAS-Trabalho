@@ -18,7 +18,7 @@ async function postNews() {
 
 function createArticle(article){
     return `
-           <article class="article">
+           <article class="article card col-4" style="" >
      <img src="${article.imagem}" class="card-img-top" alt="..." />
            <div class="card-body">
              <h5 class="card-title">${article.nome}</h5>

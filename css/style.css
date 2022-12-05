@@ -36,7 +36,12 @@
     box-shadow: 3px 3px 3px 4px rgb(216, 216, 216);
   }
   .article img {
-    width: 100%;
+    margin: auto;
+    width: 35%;
+    margin-left: 25%;
+    justify-content: center;
+    align-items:center;
+    
   }
   .article a,
   .article a:visited {
@@ -52,8 +57,25 @@ margin-top: 5%;
 display: flex;
  }
 
+ .card-img-top{
+ display: 10%;
+ }
+ .card-body{
+  padding: 35px;
+  margin: 35px;
+  width: 250px;
+
+  
+ }
+
+ .card-title{
+  text-align: center;
+    text-transform: uppercase;
+
+ }
+
  .margin { 
-  margin-top: 15% !important;
+  margin-top: 20% !important;
  }
 
  @media(max-width:600%){
