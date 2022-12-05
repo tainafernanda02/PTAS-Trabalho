@@ -1,41 +1,48 @@
-let cacheName = "noticias-app";
-let filesToCache = ["/", "/index.html", 
-                "/css/style.css", "/js/main.js", "https://fonts.googleapis.com/css?family=Poppins&display=swap",
-                "/pages/fallback.html", "/home.html"];
 
-/* inicializando a service worker e fazendo o 
-download do conteúdo da aplicação */
-self.addEventListener("install", (e) => {
-  e.waitUntil(
-    caches.open(cacheName).then(function (cache) {
-      return cache.addAll(filesToCache);
-    })
-  );
+const OFFLINE_VERSION = 1;
+const CACHE_NAME = "offline";
+const OFFLINE_URL = "/pages/fallback.html";
+
+self.addEventListener("install", (event) => {
+    event.waitUntil(
+        (async () => {
+            const cache = await caches.open(CACHE_NAME);
+            // Setting {cache: 'reload'} in the new request will ensure that the response
+            // isn't fulfilled from the HTTP cache; i.e., it will be from the network.
+            await cache.add(new Request(OFFLINE_URL, { cache: "reload" }));
+        })()
+    );
 });
 
-/* disponibilizando o conteudo quando estiver offline */
-self.addEventListener("fetch", (e) => {
-    const req = e.request;
-    const url = new URL(req.url);
-    if(url.origin === location.origin) {
-        e.respondWith(cacheFirst(req));
-      }else {
-        e.respondWith(networkFirst(req));
-      }
+self.addEventListener("activate", (event) => {
+    // Tell the active service worker to take control of the page immediately.
+    self.clients.claim();
 });
 
-async function cacheFirst(req) {
-    const cachedResponse = await caches.match(req);
-    return cachedResponse || fetch(req);
-  }
-  
-  async function networkFirst(req) {
-    const cache = await caches.open('noticias-app');
-    try {
-      const res = await fetch(req);
-      cache.put(req, res.clone());
-      return res;
-    } catch(error) {
-      return await cache.match(req);
+self.addEventListener("fetch", (event) => {
+    // We only want to call event.respondWith() if this is a navigation request
+    // for an HTML page.
+    if (event.request.mode === "navigate") {
+        if (event.request.url.match(/SignOut/)) {
+            return false;
+        }
+        event.respondWith(
+            (async () => {
+                try {
+                    const networkResponse = await fetch(event.request);
+                    return networkResponse;
+                } catch (error) {
+                    // catch is only triggered if an exception is thrown, which is likely
+                    // due to a network error.
+                    // If fetch() returns a valid HTTP response with a response code in
+                    // the 4xx or 5xx range, the catch() will NOT be called.
+                    console.log("Fetch failed; returning offline page instead.", error);
+
+                    const cache = await caches.open(CACHE_NAME);
+                    const cachedResponse = await cache.match(OFFLINE_URL);
+                    return cachedResponse;
+                }
+            })()
+        );
     }
-  }
+});

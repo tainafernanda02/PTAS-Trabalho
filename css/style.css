@@ -3,6 +3,11 @@
     padding: 0;
     box-sizing: border-box;
   }
+
+  .C{
+   display: inline;
+  }
+
   body {
     font-family: 'Poppins';
   }
@@ -50,3 +55,10 @@ display: flex;
  .margin { 
   margin-top: 15% !important;
  }
+
+ @media(max-width:600%){
+  .grid{
+    width:100%;
+    flex-direction: column;
+  }
+}
